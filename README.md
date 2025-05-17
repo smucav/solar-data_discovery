@@ -28,3 +28,11 @@ solar-data_discovery/
 ├── src/                 # Source code
 └── tests/               # Test files
 ```
+
+## EDA and Data Cleaning
+```
+- Completed exploratory data analysis for Benin, Sierra Leone, and Togo.
+- Notebooks: `notebooks/benin_eda.ipynb`, `sierra_leone_eda.ipynb`, `togo_eda.ipynb`
+- Visualizations: Time series, correlation heatmaps, wind roses, bubble charts in `notebooks/figures/`
+- Cleaned datasets saved locally in `data/` (not committed).
+```
