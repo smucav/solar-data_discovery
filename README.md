@@ -16,8 +16,9 @@ source .venv/bin/activate
 .venv\Scripts\activate
 
 pip install -r requirements.txt
-
+```
 ## 📁 Project Structure
+```
 solar-data_discovery/
 ├── notebooks/           # EDA notebooks for each country
 ├── app/                 # Streamlit dashboard code
@@ -26,3 +27,4 @@ solar-data_discovery/
 ├── scripts/             # Utility scripts
 ├── src/                 # Source code
 └── tests/               # Test files
+```
