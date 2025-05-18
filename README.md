@@ -83,6 +83,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 ## 📁 Project Structure
+```
 solar-data_discovery/
 ├── notebooks/         # Jupyter notebooks (EDA & visualizations)
 │   ├── benin_eda.ipynb
@@ -100,7 +101,7 @@ solar-data_discovery/
 ├── src/               # Core processing logic
 ├── tests/             # Unit and integration tests
 └── requirements.txt   # Project dependencies
-
+```
 ## 🧪 Running the Analysis
 
 Open notebooks:
