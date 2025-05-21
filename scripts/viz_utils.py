@@ -5,15 +5,16 @@ from scipy.stats import kruskal
 import numpy as np
 
 def load_and_combine_data(benin_path: str, sierra_leone_path: str, togo_path: str) -> pd.DataFrame:
-    """Load and combine cleaned datasets from multiple countries.
+    """
+    Load CSV data for three countries, add 'Country' column, and combine into a single DataFrame.
 
     Args:
-        benin_path (str): Path to Benin's cleaned CSV.
-        sierra_leone_path (str): Path to Sierra Leone's cleaned CSV.
-        togo_path (str): Path to Togo's cleaned CSV.
+        benin_path (str): File path for Benin data CSV.
+        sierra_leone_path (str): File path for Sierra Leone data CSV.
+        togo_path (str): File path for Togo data CSV.
 
     Returns:
-        pd.DataFrame: Combined DataFrame with 'Country' column.
+        pd.DataFrame: Combined data with country labels.
     """
     benin = pd.read_csv(benin_path)
     sierra_leone = pd.read_csv(sierra_leone_path)
@@ -24,14 +25,18 @@ def load_and_combine_data(benin_path: str, sierra_leone_path: str, togo_path: st
     return pd.concat([benin, sierra_leone, togo], ignore_index=True)
 
 def plot_metric_boxplots(df: pd.DataFrame, metrics: list, save_path: str) -> None:
-    """Plot side-by-side boxplots for specified metrics across countries.
+    """
+    Generate and save boxplots for given metrics grouped by country.
 
     Args:
-        df (pd.DataFrame): Combined DataFrame with 'Country' and metric columns.
-        metrics (list): List of metrics to plot (e.g., ['GHI', 'DNI', 'DHI']).
-        save_path (str): Path to save the plot.
+        df (pd.DataFrame): Data containing metrics and 'Country' column.
+        metrics (list): List of metric column names to plot.
+        save_path (str): File path to save the figure.
+
+    Returns:
+        None
     """
-    fig, axes = plt.subplots(1, len(metrics), figsize=(15, 5))
+    fig, axes = plt.subplots(1, len(metrics), figsize=(6, 3))
     for i, metric in enumerate(metrics):
         sns.boxplot(x='Country', y=metric, data=df, ax=axes[i])
         axes[i].set_title(f'{metric} Distribution')
@@ -42,14 +47,15 @@ def plot_metric_boxplots(df: pd.DataFrame, metrics: list, save_path: str) -> Non
     plt.close()
 
 def create_summary_table(df: pd.DataFrame, metrics: list) -> pd.DataFrame:
-    """Create a summary table of mean, median, and std for metrics by country.
+    """
+    Compute summary statistics (mean, median, std) for specified metrics by country.
 
     Args:
-        df (pd.DataFrame): Combined DataFrame with 'Country' and metric columns.
-        metrics (list): List of metrics (e.g., ['GHI', 'DNI', 'DHI']).
+        df (pd.DataFrame): Data containing metrics and 'Country' column.
+        metrics (list): List of metric column names to summarize.
 
     Returns:
-        pd.DataFrame: Summary table with mean, median, std per metric and country.
+        pd.DataFrame: Summary statistics table with countries as rows.
     """
     summary = []
     for country in df['Country'].unique():
@@ -63,18 +69,39 @@ def create_summary_table(df: pd.DataFrame, metrics: list) -> pd.DataFrame:
     return pd.DataFrame(summary)
 
 def run_kruskal_wallis(df: pd.DataFrame, metric: str) -> tuple:
-    """Run Kruskal-Wallis test on a metric across countries.
+    """
+    Perform Kruskal-Wallis H-test to compare distributions of a metric across countries.
 
     Args:
-        df (pd.DataFrame): Combined DataFrame with 'Country' and metric columns.
-        metric (str): Metric to test (e.g., 'GHI').
+        df (pd.DataFrame): Data containing metric and 'Country' column.
+        metric (str): Metric column name to test.
 
     Returns:
-        tuple: Statistic and p-value.
+        tuple: Test statistic and p-value.
     """
     groups = [df[df['Country'] == country][metric].dropna() for country in df['Country'].unique()]
     stat, p_value = kruskal(*groups)
     return stat, p_value
+
+def plot_metric_means_bar(df: pd.DataFrame, metric: str, ax) -> None:
+    """
+    Plot a horizontal bar chart of mean metric values by country, with values displayed on bars.
+
+    Args:
+        df (pd.DataFrame): Data containing metric and 'Country' column.
+        metric (str): Metric column name to plot.
+        ax (matplotlib.axes.Axes): Matplotlib axis to draw the plot on.
+
+    Returns:
+        None
+    """
+    means = df.groupby("Country")[metric].mean().sort_values(ascending=False)
+    sns.barplot(x=means.values, y=means.index, ax=ax)
+    for i, v in enumerate(means.values):
+        ax.text(v + 1, i, f"{v:.2f}", color='black', va='center')
+    ax.set_title(f"Average {metric} by Country")
+    ax.set_xlabel(f"{metric} (W/m²)")
+    ax.set_ylabel("")
 
 def plot_ghi_ranking(df: pd.DataFrame, save_path: str) -> None:
     """Plot a bar chart ranking countries by average GHI.
