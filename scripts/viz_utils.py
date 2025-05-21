@@ -102,3 +102,20 @@ def plot_metric_means_bar(df: pd.DataFrame, metric: str, ax) -> None:
     ax.set_title(f"Average {metric} by Country")
     ax.set_xlabel(f"{metric} (W/m²)")
     ax.set_ylabel("")
+
+def plot_ghi_ranking(df: pd.DataFrame, save_path: str) -> None:
+    """Plot a bar chart ranking countries by average GHI.
+
+    Args:
+        df (pd.DataFrame): Combined DataFrame with 'Country' and 'GHI' columns.
+        save_path (str): Path to save the plot.
+    """
+    ghi_means = df.groupby('Country')['GHI'].mean().sort_values(ascending=False)
+    plt.figure(figsize=(8, 6))
+    sns.barplot(x=ghi_means.values, y=ghi_means.index)
+    plt.title('Average GHI Ranking by Country')
+    plt.xlabel('Average GHI (W/m²)')
+    plt.ylabel('Country')
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
