@@ -65,6 +65,33 @@ if update:
     summary_df = create_summary_table(filtered_df, metrics=[metric])
     st.dataframe(summary_df, use_container_width=True)
 
+    # After all existing code in if update: block
+
+    # Generate summary stats for selected metric
+    summary_stats = create_summary_table(filtered_df, metrics=[metric])
+
+    # Extract key stats as dict for easy access
+    stats_dict = summary_stats.set_index('Country').to_dict(orient='index')
+
+    # Logic to find key observations
+    highest_avg_country = summary_stats.loc[summary_stats[f'{metric}_Mean'].idxmax()]['Country']
+    lowest_median_country = summary_stats.loc[summary_stats[f'{metric}_Median'].idxmin()]['Country']
+    highest_std_country = summary_stats.loc[summary_stats[f'{metric}_Std'].idxmax()]['Country']
+
+    # Compose summary markdown string
+    summary_md = f"""
+    ### 🔍 Key Observations
+
+    🌍 **{highest_avg_country}** has the highest average {metric}, indicating strong solar potential.
+
+    🌩️ **{lowest_median_country}** shows the lowest median {metric} values, suggesting inconsistencies or lower availability.
+
+    ⚡ **{highest_std_country}** has the highest variability in {metric}, indicating unstable solar conditions.
+    """
+
+    st.markdown(summary_md)
+
+
     st.success("Dashboard updated!")
 else:
     st.info("Use the sidebar to filter and click 'Update Dashboard'")
