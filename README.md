@@ -75,6 +75,16 @@ This repository contains work for analyzing solar farm data from **Benin**, **Si
 - Modular functions in `scripts/viz_utils.py` with docstrings
 - Outputs saved in `notebooks/figures/` and `notebooks/figures/summary_table.csv`
 
+## Interactive Dashboard (Task 4)
+- Developed a Streamlit app in `app/main.py`
+- Features:
+  - Country selection widget
+  - Interactive GHI boxplot
+  - Table of top regions by average GHI
+- Deployed to Streamlit Community Cloud: [Insert URL]
+- Screenshot saved in `dashboard_screenshots/`
+- Run locally: `streamlit run app/main.py`
+
 ## ⚙️ Setup Instructions
 
 ```bash
