@@ -9,15 +9,20 @@ This repository contains work for analyzing solar farm data from **Benin**, **Si
 **Objective:** Establish a reproducible development environment with Git and CI/CD.
 
 **Implementation:**
+
 - Initialized GitHub repo: [solar-data_discovery](https://github.com/smucav/solar-data_discovery)
 - Created modular folder structure:
   - `app/`, `notebooks/`, `scripts/`, `src/`, `tests/`
+
 - Configured `.gitignore` to exclude:
   - `data/`, raw `.csv` files, and `.venv/`
+
 - Set up `requirements.txt` with dependencies:
   - e.g., `pandas==2.2.3`, `streamlit==1.45.1`, `windrose`, etc.
+
 - Implemented CI workflow:
   - `.github/workflows/ci.yml` using Python 3.12.3
+
 - Documented setup in `README.md`
 - Merged `setup-task` branch into `main` via Pull Request with multiple commits
 
@@ -59,6 +64,26 @@ This repository contains work for analyzing solar farm data from **Benin**, **Si
 
 **Outcome:** Clean datasets with actionable insights into solar energy potential across regions.
 
+## Cross-Country Comparison (Task 3)
+- Synthesized cleaned datasets in `notebooks/compare_countries.ipynb`
+- Visualizations:
+  - Side-by-side boxplots for GHI, DNI, DHI across Benin, Sierra Leone, Togo
+  - Bar chart ranking countries by average GHI
+- Summary table: Mean, median, standard deviation for GHI, DNI, DHI
+- Statistical testing: Kruskal-Wallis test on GHI (p-value reported)
+- Key observations: Highlighted differences in solar potential
+- Modular functions in `scripts/viz_utils.py` with docstrings
+- Outputs saved in `notebooks/figures/` and `notebooks/figures/summary_table.csv`
+
+## Interactive Dashboard (Task 4)
+- Developed a Streamlit app in `app/main.py`
+- Features:
+  - Country selection widget
+  - Interactive GHI boxplot
+  - Table of top regions by average GHI
+- Deployed to Streamlit Community Cloud: [Insert URL]
+- Screenshot saved in `dashboard_screenshots/`
+- Run locally: `streamlit run app/main.py`
 
 ## ⚙️ Setup Instructions
 
