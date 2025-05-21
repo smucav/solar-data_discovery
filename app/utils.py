@@ -25,12 +25,18 @@ def load_data():
     Returns:
         pd.DataFrame: Combined solar data with a 'Country' column added.
     """
-    df = load_and_combine_data(
-        'data/benin_clean.csv',
-        'data/sierraleone_clean.csv',
-        'data/togo_clean.csv'
+    df2 = load_and_combine_data(
+        'https://drive.google.com/uc?export=download&id=14P7X9d7TPNMsnUliGy3CmWtW5yb-FYEq',
+        'https://drive.google.com/uc?export=download&id=1j65ix7VopeFT1uxtD6-YA3icHzofUd-D',
+        'https://drive.google.com/uc?export=download&id=1V1rqrXynBK0p7HKO4L_aLxab_9fbLQZg'
     )
-    return df
+
+    # df = load_and_combine_data(
+    #     'data/benin_clean.csv',
+    #     'data/sierraleone_clean.csv',
+    #     'data/togo_clean.csv'
+    # )
+    return df2
 
 def filter_data(df: pd.DataFrame, countries: list, metric: str, min_val: float, max_val: float) -> pd.DataFrame:
     """
