@@ -31,11 +31,11 @@ def load_data():
         'https://drive.google.com/uc?export=download&id=1V1rqrXynBK0p7HKO4L_aLxab_9fbLQZg'
     )
 
-    df = load_and_combine_data(
-        'data/benin_clean.csv',
-        'data/sierraleone_clean.csv',
-        'data/togo_clean.csv'
-    )
+    # df = load_and_combine_data(
+    #     'data/benin_clean.csv',
+    #     'data/sierraleone_clean.csv',
+    #     'data/togo_clean.csv'
+    # )
     return df2
 
 def filter_data(df: pd.DataFrame, countries: list, metric: str, min_val: float, max_val: float) -> pd.DataFrame:
