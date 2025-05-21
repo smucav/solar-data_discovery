@@ -2,6 +2,10 @@
 
 This repository contains work for analyzing solar farm data from **Benin**, **Sierra Leone**, and **Togo** to support **MoonLight Energy** in identifying high-potential regions for solar installations.
 
+
+Deployed to Streamlit Community Cloud: [smucav.streamlit.app](https://smucav.streamlit.app)
+
+
 ## 🚀 Contributions & Implementation
 
 ### ✅ Task 1: Git & Environment Setup
